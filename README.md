@@ -1,5 +1,7 @@
 # cppyy-knn: An example of cppyy-generated bindings for a simple knn implementation
 
+[![Build Status](https://travis-ci.org/camillescott/cppyy-knn.svg?branch=master)](https://travis-ci.org/camillescott/cppyy-knn)
+
 This is an example project showing how to integrate a C++ kNearestNeighbors implementation with
 [cppyy](https://bitbucket.org/wlav/cppyy/src/master/) to enable calling from Python. It's c++ code
 comes from an [alternative example](https://github.com/jclay/cppyy-knearestneighbors-example) which
