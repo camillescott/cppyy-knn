@@ -1,0 +1,9 @@
+<lcgdict>
+    <selection>
+        <class name="Point"/>
+        <class name="NearestNeighbors"/>
+        <class name="std::vector<Point>"/>
+    </selection>        
+    <exclusion>
+    </exclusion>
+</lcgdict>
