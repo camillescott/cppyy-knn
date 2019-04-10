@@ -19,7 +19,7 @@ endif()
 set(CMAKE_INCLUDE_DIRECTORIES_BEFORE ON)
 
 # headers are listed in a cmake file.
-include(${CMAKE_SOURCE_DIR}/cmake/headers.cmake)
+include(${CMAKE_SOURCE_DIR}/manifest.cmake)
 include(GNUInstallDirs)
 
 # we want the conda includes if we're in a conda environment.
@@ -43,24 +43,19 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif(NOT CMAKE_BUILD_TYPE)
 
-set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
-find_package(Threads)
-
 #
 # Set up the knn shared lib
 #
-set(KNN_SOURCES ${CMAKE_SOURCE_DIR}/src/nearest_neighbors.cpp)
-set(KNN_HEADERS ${CMAKE_SOURCE_DIR}/src/nearest_neighbors.h)
 add_library(simpleknn
             SHARED
-            ${KNN_SOURCES}
+            ${LIB_SOURCES}
 )
 set_target_properties(simpleknn PROPERTIES LINKER_LANGUAGE CXX)
 set_target_properties(simpleknn PROPERTIES
                       VERSION ${PROJECT_VERSION}
                       SOVERSION 1
 )
-set_target_properties(simpleknn PROPERTIES PUBLIC_HEADER ${KNN_HEADERS})
+set_target_properties(simpleknn PROPERTIES PUBLIC_HEADER ${LIB_HEADERS})
 target_include_directories(simpleknn
                            PUBLIC
                            ${CMAKE_SOURCE_DIR}/src
@@ -81,7 +76,7 @@ cppyy_add_bindings(
    LANGUAGE_STANDARD "14"
    SELECTION_XML  ${CMAKE_SOURCE_DIR}/selection.xml
    INTERFACE_FILE ${CMAKE_SOURCE_DIR}/src/nearest_neighbors.h
-   HEADERS        ${KNN_HEADERS} 
+   HEADERS        ${LIB_HEADERS} 
    INCLUDE_DIRS   ${CMAKE_SOURCE_DIR}/src
    LINK_LIBRARIES simpleknn
 )
